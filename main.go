@@ -11,5 +11,5 @@ func main() {
 	router := gin.Default()
 	router.GET("/reserves/:date", reserves.GetReserves)
 	router.GET("/users-balances/:date", users.GetUsersBalances)
-	router.Run("localhost:8080")
+	router.Run("0.0.0.0:5000")
 }
