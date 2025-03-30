@@ -9,7 +9,7 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.GET("/reserves/:date", reserves.GetReserves)
+	router.GET("/reserves", reserves.GetReserves)
 	router.GET("/users-balances/:date", users.GetUsersBalances)
 	router.Run("0.0.0.0:5000")
 }
