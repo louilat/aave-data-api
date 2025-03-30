@@ -15,6 +15,6 @@ func main() {
 	router := gin.Default()
 	router.GET("/", HomePage)
 	router.GET("/reserves", reserves.GetReserves)
-	router.GET("/users-balances/:date", users.GetUsersBalances)
+	router.GET("/users-balances", users.GetUsersBalances)
 	router.Run("0.0.0.0:5000")
 }

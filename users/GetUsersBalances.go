@@ -17,7 +17,7 @@ func GetUsersBalances(c *gin.Context) {
 		SecretAccessKey: os.Getenv("SECRET_ACCESS_KEY"),
 	}
 
-	rdt := c.Param("date")
+	rdt := c.Query("date")
 	const layout = "2006-Jan-02"
 	dt, err := time.Parse(layout, rdt)
 	if err != nil {
