@@ -1,6 +1,7 @@
 package main
 
 import (
+	"aave-data-api/prices"
 	"aave-data-api/reserves"
 	"aave-data-api/users"
 
@@ -16,5 +17,6 @@ func main() {
 	router.GET("/", HomePage)
 	router.GET("/reserves", reserves.GetReserves)
 	router.GET("/users-balances", users.GetUsersBalances)
+	router.GET("/prices", prices.GetPrices)
 	router.Run("0.0.0.0:5000")
 }

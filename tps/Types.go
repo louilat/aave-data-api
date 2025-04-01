@@ -32,3 +32,10 @@ type UserBalanceData struct {
 	ScaledATokenBalance big.Int `json:"scaledATokenBalance"`
 	ScaledVariableDebt  big.Int `json:"scaledVariableDebt"`
 }
+
+type PriceData struct {
+	Block     string  `json:"BlockNumber"`
+	Timestamp big.Int `json:"Timestamp"`
+	Asset     string  `json:"UnderlyingToken"`
+	Price     big.Int `json:"Price"`
+}
