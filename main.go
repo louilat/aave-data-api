@@ -17,6 +17,7 @@ func main() {
 	router.GET("/", HomePage)
 	router.GET("/reserves", reserves.GetReserves)
 	router.GET("/users-balances", users.GetUsersBalances)
+	router.GET("/user-selec-balances", users.GetUsersSelectionBalances)
 	router.GET("/prices", prices.GetPrices)
 	router.Run("0.0.0.0:5000")
 }
