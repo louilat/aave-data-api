@@ -1,6 +1,7 @@
 package main
 
 import (
+	"aave-data-api/events"
 	"aave-data-api/prices"
 	"aave-data-api/reserves"
 	"aave-data-api/users"
@@ -19,5 +20,10 @@ func main() {
 	router.GET("/users-balances", users.GetUsersBalances)
 	router.GET("/user-selec-balances", users.GetUsersSelectionBalances)
 	router.GET("/prices", prices.GetPrices)
+	router.GET("/events/supply", events.GetSupply)
+	router.GET("/events/borrow", events.GetBorrow)
+	router.GET("/events/withdraw", events.GetWithdraw)
+	router.GET("/events/repay", events.GetRepay)
+	router.GET("/events/liquidation", events.GetLiquidationCall)
 	router.Run("0.0.0.0:5000")
 }
