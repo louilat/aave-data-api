@@ -144,3 +144,30 @@ func GetLiquidationCall(c *gin.Context) {
 		c.IndentedJSON(http.StatusOK, data)
 	}
 }
+
+func GetReserveDataUpdated(c *gin.Context) {
+	creds := tps.MinioCreds{
+		Endpoint:        "minio-simple.lab.groupe-genes.fr",
+		AccessKeyID:     os.Getenv("ACCESS_KEY_ID"),
+		SecretAccessKey: os.Getenv("SECRET_ACCESS_KEY"),
+	}
+
+	rdt := c.Query("date")
+	const layout = "2006-Jan-02"
+	dt, err := time.Parse(layout, rdt)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err})
+	}
+
+	if dt.Weekday() > 7 {
+		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "No content found"})
+	} else {
+		key := "aave-api-datasource/daily-decoded-events/decoded_events_snapshot_date=" + dt.String()[:10] + "/decoded_ReserveDataUpdated.json"
+		data, err := minio.ExtractReserveDataUpdatedData(creds, "projet-datalab-group-jprat", key)
+		if err != nil {
+			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err})
+		}
+
+		c.IndentedJSON(http.StatusOK, data)
+	}
+}

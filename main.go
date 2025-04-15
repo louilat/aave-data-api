@@ -25,5 +25,6 @@ func main() {
 	router.GET("/events/withdraw", events.GetWithdraw)
 	router.GET("/events/repay", events.GetRepay)
 	router.GET("/events/liquidation", events.GetLiquidationCall)
+	router.GET("/events/reservedataupdated", events.GetReserveDataUpdated)
 	router.Run("0.0.0.0:5000")
 }

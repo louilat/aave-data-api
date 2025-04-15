@@ -89,18 +89,11 @@ type RepayEvent struct {
 	UseATokens big.Int `json:"useATokens"`
 }
 
-// func (s SupplyEvent) DataName() string {
-// 	return "SupplyEvent"
-// }
-
-// func (b BorrowEvent) DataName() string {
-// 	return "BorrowEvent"
-// }
-
-// func (w WithdrawEvent) DataName() string {
-// 	return "WithdrawEvent"
-// }
-
-// func (r RepayEvent) DataName() string {
-// 	return "RepayEvent"
-// }
+type ReserveDataUpadedEvent struct {
+	Block               big.Int `json:"blockNumber"`
+	Reserve             string  `json:"reserve"`
+	LiquidityRate       string  `json:"liquidityRate"`
+	VariableBorrowRate  string  `json:"variableBorrowRate"`
+	LiquidityIndex      string  `json:"liquidityIndex"`
+	VariableBorrowIndex string  `json:"variableBorrowIndex"`
+}
