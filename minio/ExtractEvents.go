@@ -169,3 +169,30 @@ func ExtractReserveDataUpdatedData(creds tps.MinioCreds, bucket string, key stri
 
 	return records, nil
 }
+
+func ExtractBalanceTransferData(creds tps.MinioCreds, bucket string, key string) ([]tps.BalanceTransferEvent, error) {
+	useSSL := false
+	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
+	if err != nil {
+		return make([]tps.BalanceTransferEvent, 0), err
+	}
+
+	obj, err := minioClient.GetObject(bucket, key, minio.GetObjectOptions{})
+	if err != nil {
+		return make([]tps.BalanceTransferEvent, 0), err
+	}
+
+	bytes, err := io.ReadAll(obj)
+	if err != nil {
+		return make([]tps.BalanceTransferEvent, 0), err
+	}
+
+	var records []tps.BalanceTransferEvent
+
+	er := json.Unmarshal(bytes, &records)
+	if er != nil {
+		return make([]tps.BalanceTransferEvent, 0), er
+	}
+
+	return records, nil
+}

@@ -97,3 +97,11 @@ type ReserveDataUpadedEvent struct {
 	LiquidityIndex      string  `json:"liquidityIndex"`
 	VariableBorrowIndex string  `json:"variableBorrowIndex"`
 }
+
+type BalanceTransferEvent struct {
+	Block   big.Int `json:"blockNumber"`
+	Reserve string  `json:"reserve"`
+	From    string  `json:"from"`
+	To      string  `json:"to"`
+	Amount  big.Int `json:"amount"`
+}
