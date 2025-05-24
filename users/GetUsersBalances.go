@@ -3,6 +3,8 @@ package users
 import (
 	"aave-data-api/minio"
 	"aave-data-api/tps"
+	"crypto/sha256"
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -24,7 +26,7 @@ func GetUsersBalances(c *gin.Context) {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err})
 	}
 
-	if dt.Weekday() > 7 {
+	if dt.Weekday() != 1 {
 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "No content found"})
 	} else {
 		key := "aave-api-datasource/daily-users-balances/users_balances_snapshot_date=" + dt.String()[:10] + "/users_balances.json"
@@ -32,7 +34,9 @@ func GetUsersBalances(c *gin.Context) {
 		if err != nil {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err})
 		}
-
+		for i := range data {
+			data[i].User = fmt.Sprintf("%x", sha256.Sum256([]byte(data[i].User)))
+		}
 		c.IndentedJSON(http.StatusOK, data)
 	}
 }
