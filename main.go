@@ -28,4 +28,5 @@ func main() {
 	router.GET("/events/reservedataupdated", events.GetReserveDataUpdated)
 	router.GET("/events/balancetransfer", events.GetBalanceTransfer)
 	router.Run("0.0.0.0:5000")
+
 }
