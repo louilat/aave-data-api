@@ -24,7 +24,7 @@ func GetReserves(c *gin.Context) {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err})
 	}
 
-	if dt.Weekday() != 1 || dt.Year() != 2024 {
+	if dt.Weekday() != 1 || dt.Year() > 2024 {
 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "No content found"})
 	} else {
 		key := "aave-api-datasource/daily-users-balances/users_balances_snapshot_date=" + dt.String()[:10] + "/reserves_data.json"
