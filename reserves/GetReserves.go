@@ -27,7 +27,7 @@ func GetReserves(c *gin.Context) {
 	if dt.Weekday() != 1 || dt.Year() > 2024 {
 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "No content found"})
 	} else {
-		key := "aave-api-datasource/daily-users-balances/users_balances_snapshot_date=" + dt.String()[:10] + "/reserves_data.json"
+		key := "aavev3-raw-datasource /daily-users-balances /users_balances_snapshot_date=" + dt.String()[:10] + "/reserves_data.json"
 		data, err := minio.ExtractReservesData(creds, "projet-datalab-group-jprat", key)
 		if err != nil {
 			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err})
