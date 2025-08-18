@@ -9,7 +9,7 @@ import (
 )
 
 func ExtractUsersBalancesData(creds tps.MinioCreds, bucket string, key string) ([]tps.UserBalanceData, error) {
-	useSSL := false
+	useSSL := true
 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
 	if err != nil {
 		return make([]tps.UserBalanceData, 0), err
@@ -27,9 +27,9 @@ func ExtractUsersBalancesData(creds tps.MinioCreds, bucket string, key string) (
 
 	var records []tps.UserBalanceData
 
-	er := json.Unmarshal(bytes, &records)
-	if er != nil {
-		return make([]tps.UserBalanceData, 0), er
+	err = json.Unmarshal(bytes, &records)
+	if err != nil {
+		return make([]tps.UserBalanceData, 0), err
 	}
 
 	return records, nil

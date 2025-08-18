@@ -9,7 +9,7 @@ import (
 )
 
 func ExtractSupplyData(creds tps.MinioCreds, bucket string, key string) ([]tps.SupplyEvent, error) {
-	useSSL := false
+	useSSL := true
 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
 	if err != nil {
 		return make([]tps.SupplyEvent, 0), err
@@ -36,7 +36,7 @@ func ExtractSupplyData(creds tps.MinioCreds, bucket string, key string) ([]tps.S
 }
 
 func ExtractBorrowData(creds tps.MinioCreds, bucket string, key string) ([]tps.BorrowEvent, error) {
-	useSSL := false
+	useSSL := true
 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
 	if err != nil {
 		return make([]tps.BorrowEvent, 0), err
@@ -63,7 +63,7 @@ func ExtractBorrowData(creds tps.MinioCreds, bucket string, key string) ([]tps.B
 }
 
 func ExtractWithdrawData(creds tps.MinioCreds, bucket string, key string) ([]tps.WithdrawEvent, error) {
-	useSSL := false
+	useSSL := true
 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
 	if err != nil {
 		return make([]tps.WithdrawEvent, 0), err
@@ -90,7 +90,7 @@ func ExtractWithdrawData(creds tps.MinioCreds, bucket string, key string) ([]tps
 }
 
 func ExtractRepayData(creds tps.MinioCreds, bucket string, key string) ([]tps.RepayEvent, error) {
-	useSSL := false
+	useSSL := true
 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
 	if err != nil {
 		return make([]tps.RepayEvent, 0), err
@@ -117,7 +117,7 @@ func ExtractRepayData(creds tps.MinioCreds, bucket string, key string) ([]tps.Re
 }
 
 func ExtractLiquidationCallData(creds tps.MinioCreds, bucket string, key string) ([]tps.LiquidationCallEvent, error) {
-	useSSL := false
+	useSSL := true
 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
 	if err != nil {
 		return make([]tps.LiquidationCallEvent, 0), err
@@ -143,56 +143,56 @@ func ExtractLiquidationCallData(creds tps.MinioCreds, bucket string, key string)
 	return records, nil
 }
 
-func ExtractReserveDataUpdatedData(creds tps.MinioCreds, bucket string, key string) ([]tps.ReserveDataUpadedEvent, error) {
-	useSSL := false
-	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
-	if err != nil {
-		return make([]tps.ReserveDataUpadedEvent, 0), err
-	}
+// func ExtractReserveDataUpdatedData(creds tps.MinioCreds, bucket string, key string) ([]tps.ReserveDataUpadedEvent, error) {
+// 	useSSL := false
+// 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
+// 	if err != nil {
+// 		return make([]tps.ReserveDataUpadedEvent, 0), err
+// 	}
 
-	obj, err := minioClient.GetObject(bucket, key, minio.GetObjectOptions{})
-	if err != nil {
-		return make([]tps.ReserveDataUpadedEvent, 0), err
-	}
+// 	obj, err := minioClient.GetObject(bucket, key, minio.GetObjectOptions{})
+// 	if err != nil {
+// 		return make([]tps.ReserveDataUpadedEvent, 0), err
+// 	}
 
-	bytes, err := io.ReadAll(obj)
-	if err != nil {
-		return make([]tps.ReserveDataUpadedEvent, 0), err
-	}
+// 	bytes, err := io.ReadAll(obj)
+// 	if err != nil {
+// 		return make([]tps.ReserveDataUpadedEvent, 0), err
+// 	}
 
-	var records []tps.ReserveDataUpadedEvent
+// 	var records []tps.ReserveDataUpadedEvent
 
-	er := json.Unmarshal(bytes, &records)
-	if er != nil {
-		return make([]tps.ReserveDataUpadedEvent, 0), er
-	}
+// 	er := json.Unmarshal(bytes, &records)
+// 	if er != nil {
+// 		return make([]tps.ReserveDataUpadedEvent, 0), er
+// 	}
 
-	return records, nil
-}
+// 	return records, nil
+// }
 
-func ExtractBalanceTransferData(creds tps.MinioCreds, bucket string, key string) ([]tps.BalanceTransferEvent, error) {
-	useSSL := false
-	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
-	if err != nil {
-		return make([]tps.BalanceTransferEvent, 0), err
-	}
+// func ExtractBalanceTransferData(creds tps.MinioCreds, bucket string, key string) ([]tps.BalanceTransferEvent, error) {
+// 	useSSL := false
+// 	minioClient, err := minio.New(creds.Endpoint, creds.AccessKeyID, creds.SecretAccessKey, useSSL)
+// 	if err != nil {
+// 		return make([]tps.BalanceTransferEvent, 0), err
+// 	}
 
-	obj, err := minioClient.GetObject(bucket, key, minio.GetObjectOptions{})
-	if err != nil {
-		return make([]tps.BalanceTransferEvent, 0), err
-	}
+// 	obj, err := minioClient.GetObject(bucket, key, minio.GetObjectOptions{})
+// 	if err != nil {
+// 		return make([]tps.BalanceTransferEvent, 0), err
+// 	}
 
-	bytes, err := io.ReadAll(obj)
-	if err != nil {
-		return make([]tps.BalanceTransferEvent, 0), err
-	}
+// 	bytes, err := io.ReadAll(obj)
+// 	if err != nil {
+// 		return make([]tps.BalanceTransferEvent, 0), err
+// 	}
 
-	var records []tps.BalanceTransferEvent
+// 	var records []tps.BalanceTransferEvent
 
-	er := json.Unmarshal(bytes, &records)
-	if er != nil {
-		return make([]tps.BalanceTransferEvent, 0), er
-	}
+// 	er := json.Unmarshal(bytes, &records)
+// 	if er != nil {
+// 		return make([]tps.BalanceTransferEvent, 0), er
+// 	}
 
-	return records, nil
-}
+// 	return records, nil
+// }

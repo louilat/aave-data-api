@@ -12,25 +12,6 @@ type MinioCreds struct {
 	SecretAccessKey string
 }
 
-// type AaveV3Data interface {
-// 	DataName()
-// }
-
-// type ReserveData struct {
-// 	Name                 string  `json:"name"`
-// 	LastUpdateTimestamp  int64   `json:"lastUpdateTimestamp"`
-// 	Decimals             int64   `json:"decimals"`
-// 	Asset                string  `json:"underlyingAsset"`
-// 	PriceUSD             float64 `json:"underlyingTokenPriceUSD"`
-// 	LiquidityRate        string  `json:"liquidityRate"`
-// 	VariableBorrowRate   string  `json:"variableBorrowRate"`
-// 	LiquidityIndex       string  `json:"liquidityIndex"`
-// 	VariableBorrowIndex  string  `json:"variableBorrowIndex"`
-// 	LiquidationThreshold int64   `json:"reserveLiquidationThreshold"`
-// 	AvailableLiquidity   string  `json:"availableLiquidity"`
-// 	TotalVariableDebt    string  `json:"totalScaledVariableDebt"`
-// }
-
 type ReserveData struct {
 	BlockNumber             *big.Int `json:"blockNumber"`
 	Name                    string   `json:"name"`
@@ -68,16 +49,6 @@ type ReserveData struct {
 	EModeCategory          int64 `json:"eModeCategory"`
 }
 
-// type UserBalanceData struct {
-// 	Block               big.Int `json:"snapshot_block"`
-// 	User                string  `json:"user_address"`
-// 	Name                string  `json:"name"`
-// 	Asset               string  `json:"underlyingAsset"`
-// 	Decimals            big.Int `json:"decimals"`
-// 	ScaledATokenBalance big.Int `json:"scaledATokenBalance"`
-// 	ScaledVariableDebt  big.Int `json:"scaledVariableDebt"`
-// }
-
 type UserBalanceData struct {
 	User                    string  `json:"user"`
 	BlockNumber             float64 `json:"blockNumber"`
@@ -96,12 +67,12 @@ type UserBalanceData struct {
 	UserEMode                   float64 `json:"userEMode"`
 }
 
-type PriceData struct {
-	Block     string  `json:"BlockNumber"`
-	Timestamp big.Int `json:"Timestamp"`
-	Asset     string  `json:"UnderlyingToken"`
-	Price     big.Int `json:"Price"`
-}
+// type PriceData struct {
+// 	Block     string  `json:"BlockNumber"`
+// 	Timestamp big.Int `json:"Timestamp"`
+// 	Asset     string  `json:"UnderlyingToken"`
+// 	Price     big.Int `json:"Price"`
+// }
 
 type LiquidationCallEvent struct {
 	Block            big.Int `json:"blockNumber"`
@@ -111,56 +82,48 @@ type LiquidationCallEvent struct {
 	DebtToCover      big.Int `json:"debtToCover"`
 	CollateralAmount big.Int `json:"liquidatedCollateralAmount"`
 	Liquidator       string  `json:"liquidator"`
-	ReceiveAToken    byte    `json:"receiveAToken"`
+	// ReceiveAToken    byte    `json:"receiveAToken"`
 }
 
 type SupplyEvent struct {
-	Block      big.Int `json:"blockNumber"`
-	Reserve    string  `json:"reserve"`
-	OnBehalfOf string  `json:"onBehalfOf"`
-	User       string  `json:"user"`
-	Amount     big.Int `json:"amount"`
+	Address     string   `json:"Address"`
+	BlockNumber *big.Int `json:"BlockNumber"`
+	TxHash      string   `json:"TxHash"`
+	Reserve     string   `json:"Reserve"`
+	OnBehalfOf  string   `json:"OnBehalfOf"`
+	User        string   `json:"User"`
+	Amount      big.Int  `json:"Amount"`
 }
 
 type BorrowEvent struct {
-	Block      big.Int `json:"blockNumber"`
-	Reserve    string  `json:"reserve"`
-	OnBehalfOf string  `json:"onBehalfOf"`
-	User       string  `json:"user"`
-	Amount     big.Int `json:"amount"`
-	BorrowRate big.Int `json:"borrowRate"`
+	Address          string   `json:"Address"`
+	BlockNumber      *big.Int `json:"BlockNumber"`
+	TxHash           string   `json:"TxHash"`
+	Reserve          string   `json:"Reserve"`
+	User             string   `json:"User"`
+	OnBehalfOf       string   `json:"OnBehalfOf"`
+	Amount           *big.Int `json:"Amount"`
+	InterestRateMode *big.Int `json:"InterestRateMode"`
+	BorrowRate       *big.Int `json:"BorrowRate"`
 }
 
 type WithdrawEvent struct {
-	Block   big.Int `json:"blockNumber"`
-	Reserve string  `json:"reserve"`
-	To      string  `json:"to"`
-	User    string  `json:"user"`
-	Amount  big.Int `json:"amount"`
+	Address     string   `json:"Address"`
+	BlockNumber *big.Int `json:"BlockNumber"`
+	TxHash      string   `json:"TxHash"`
+	Reserve     string   `json:"Reserve"`
+	To          string   `json:"To"`
+	User        string   `json:"User"`
+	Amount      big.Int  `json:"Amount"`
 }
 
 type RepayEvent struct {
-	Block      big.Int `json:"blockNumber"`
-	Reserve    string  `json:"reserve"`
-	User       string  `json:"user"`
-	Repayer    string  `json:"repayer"`
-	Amount     big.Int `json:"amount"`
-	UseATokens big.Int `json:"useATokens"`
-}
-
-type ReserveDataUpadedEvent struct {
-	Block               big.Int `json:"blockNumber"`
-	Reserve             string  `json:"reserve"`
-	LiquidityRate       string  `json:"liquidityRate"`
-	VariableBorrowRate  string  `json:"variableBorrowRate"`
-	LiquidityIndex      string  `json:"liquidityIndex"`
-	VariableBorrowIndex string  `json:"variableBorrowIndex"`
-}
-
-type BalanceTransferEvent struct {
-	Block   big.Int `json:"blockNumber"`
-	Reserve string  `json:"reserve"`
-	From    string  `json:"from"`
-	To      string  `json:"to"`
-	Amount  big.Int `json:"amount"`
+	Address     string   `json:"Address"`
+	BlockNumber *big.Int `json:"BlockNumber"`
+	TxHash      string   `json:"TxHash"`
+	Reserve     string   `json:"Reserve"`
+	User        string   `json:"User"`
+	Repayer     string   `json:"Repayer"`
+	Amount      big.Int  `json:"Amount"`
+	UseATokens  big.Int  `json:"UseATokens"`
 }
